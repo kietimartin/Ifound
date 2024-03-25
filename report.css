@@ -1,0 +1,217 @@
+
+
+body{ 
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+background-color: #f4f4f4;
+}
+
+.button {
+display: inline-block;
+padding: 10px 20px;
+background-color: #007BFF;
+color: #fff;
+text-decoration: none;
+border-radius: 5px;
+}
+
+
+.headercontainer{
+width: 100%;
+height: 50px;
+color: #fff;
+background-color: black;
+border: 1px solid black;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.websitetitle{
+width: 200px;
+padding: 18px;
+height: 100%;
+box-sizing: border-box;
+color: black;
+background-color: aqua;
+text-align: center;
+
+
+}
+.bodycontainer{
+width: 100%;
+overflow: hidden;
+background-color: brown;
+}
+.navcontainer{
+float: left;
+width: 200px;
+height: 700px;
+color: #fff;
+background-color: #fff;
+}
+.categoriescontainer{
+float: left;
+width: 750px;
+height: 50px;
+margin-left: 200px;
+margin-top: 20px;
+padding: 5px;
+color: #fff;
+background-color: #fff;
+border: 1px solid black;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.categoriescontainer form {
+display: inline-block;
+margin: 0;
+padding: 0;
+}
+.dashboard {
+box-sizing: border-box;
+width: 100%;
+height: 30px; /* Adjust the height as needed */
+margin: 0;
+padding: 10px;
+background-color: #a2f50a;
+text-align: center;
+color: black;
+border: transparent;
+}
+.navbuttons {
+height: calc(100% - 30px); /* Adjust the height based on the remaining space */
+background-color: #007BFF;
+overflow-y: auto; /* Add overflow-y for scrolling if needed */
+}
+.navbuttons input[type="submit"] {
+background-color: #007bff;
+width: 40%;
+padding: 5px;
+margin: 5px;
+color: white;
+
+}
+.categoriescontainer input[type="submit"] {
+
+background-color: #007bff;
+padding: 10px;
+margin: 10px;
+text-align: center;
+color: white;
+border-radius: 20px;
+
+}
+.maincontainer{
+float: left;
+width: 750px;
+margin-left: 200px;
+margin-top: 0px;
+padding: 5px;
+color: #fff;
+background-color: #fff;
+border: 1px solid black;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.searchBox {
+width: 750px;
+height: 40px;
+background-color: #fff;
+position: absolute;
+top: 0px;
+left: 410px;
+margin: 5px;
+border: 1px solid blue;
+border-radius: 60px;
+}
+.search-input{
+width: 650px;
+height: 30px;
+margin-left: 30px;
+margin-top: 5px;
+margin-bottom: 5px;
+font-size: 18px;
+outline: none;
+border: none;
+}
+
+#searchResults {
+width: 400px;
+height: 300px;
+position: absolute;
+background-color: transparent; /* Set the initial background to transparent */
+display: none; /* Hide the results container initially */
+top: 80px;
+left: 440px;
+}
+
+#searchResults a {
+display: block;
+width: 150px; /* Set the width if needed */
+margin: 10px; /* Add margin for spacing */
+padding: 5px;
+text-decoration: none;
+color: blue;
+font-size: 16px;
+}
+.fill-text{
+width: 100%;
+box-sizing: border-box;
+color: red;
+}
+.found-items_pictures img {
+max-width: 100%;
+height: auto;
+border-radius: 3px;
+margin-right: 15px;
+}
+
+.mutual {
+display: flex;
+width: 750px;
+align-items: stretch; /* Ensure both containers stretch to the same height */
+
+}
+
+
+.container {
+width: 350px;
+background-color: #fff;
+padding: 0px;
+color: blue;
+}
+.container1 {
+width: 500px;
+background-color: #fff;
+padding: 0px;
+color: blue;
+/*
+border: 1px solid black; 
+border-radius: 20px;
+margin-bottom: 20px;
+overflow: hidden;*/
+}
+
+.found-items_pictures {
+flex: 1;
+width: 250px;
+height: 300px;
+padding: 15px;
+background-color: #fff; 
+border-bottom: 0.5px solid black;
+border-left: 1px solid black ;
+border-top: 1px solid black;
+}
+
+.found-items_texts {
+flex: 1;
+width: 440px;
+height: 300px;
+padding: 15px;
+background-color: #fff;
+border-bottom: 0.5px solid black;
+border-right: 1px solid black ;
+border-top: 1px solid black;
+
+}
+
+/* report */

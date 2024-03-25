@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost and Found</title>
+    <link rel="stylesheet" href="maincss.css">
+    <script src="js/allfounditemsdata.js"></script>
+</head>
+<body>
+
+<main>        
+    <div class="headercontainer">
+        <div class="websitetitle">
+          <!--img src="images/lost and found icon.png" alt="Icon" width="20px" height="20px"> -->  
+            iFound
+        </div>
+
+        <form>
+                <div class="searchBox">
+                    <input type="text" class="search-input" placeholder="Search..." oninput="liveSearch(this.value)">  
+                </div>      
+        </form>
+    
+        <div id="searchResults">
+
+        </div>       
+    </div>
+<div class="bodycontainer">
+    <div class="navcontainer">
+
+        <div class="dashboard">
+                DASHBOARD
+        </div>
+        <div class="navbuttons">
+            <form action="initialpage1.html" method="get">
+                <input type="submit" value="HOME">
+            </form>
+            <form action="reportform.html" method="get">
+                <input type="submit" value="REPORT">
+            </form>
+            <form action="profile.php" method="get">
+                <input type="submit" value="PROFILE">
+            </form>
+            <form action="chat.php" method="get">
+                <input type="submit" value="Chat">
+            </form>
+            <div class="logoutbox">
+                <form action="logout.php" method="get">
+                <input type="submit" value="LOG OUT">
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="categoriescontainer">
+
+        <form action="lost.html" method="get">
+            <input type="submit" value="LOST">
+        </form>
+        <form action="found.html" method="get">
+            <input type="submit" value="FOUND">
+        </form>
+        <form action="Electronics.html" method="get">
+            <input type="submit" value="Electronics">
+        </form>
+        
+        <form action="personal.html" method="get">
+            <input type="submit" value="Personal">
+        </form>
+        <form action="clothing.html" method="get">
+            <input type="submit" value="Clothing">
+        </form>
+        <form action="documents.html" method="get">
+            <input type="submit" value="Documents">
+        </form>
+        <form action="keys.html" method="get">
+            <input type="submit" value="Keys">
+        </form>
+       
+
+    </div>
+
+    <div class="maincontainer">
+
+            <div class="container" id="foundItemsContainer">
+                <!-- Found items will be dynamically added here -->
+        
+            </div>
+
+    </div>
+
+</div>
+
+    <script>
+        function liveSearch(query) {
+            const resultsContainer = document.getElementById('searchResults');
+
+            if (query.length === 0) {
+                resultsContainer.style.display = 'none';
+                resultsContainer.classList.remove('hasResults');
+                return;
+            }
+
+            // Use Fetch API to make an asynchronous request to the livesearch.php file
+            fetch(`livesearch.php?query=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Display the results
+                    resultsContainer.innerHTML = '';
+                    data.forEach(result => {
+                        const link = document.createElement('a');
+                        link.href = `details.php?id=${result.id}`; // Replace 'details.php' with your actual details page
+                        link.textContent = result.Name;
+                        resultsContainer.appendChild(link);
+                    });
+
+                    // Show the results container
+                    resultsContainer.style.display = 'block';
+
+                    // Check if there are results and add the 'hasResults' class accordingly
+                    if (data.length > 0) {
+                        resultsContainer.classList.add('hasResults');
+                    } else {
+                        resultsContainer.classList.remove('hasResults');
+                    }
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+</script>
+</main>
+   
+</body>
+</html>

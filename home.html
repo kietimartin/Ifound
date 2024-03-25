@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        .container {
+            width: 350px;
+            height: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 170px;
+            left: 1100px;
+
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .submit_button{
+            background-color: #FFFFFF;
+            padding: 5px;
+            margin: 4px 0;
+            text-align: center;
+           
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            padding: 10px;
+            margin: 8px 0;
+            text-align: center;
+            color: white;
+            border-radius: 20px;
+            
+        }
+
+
+        button {
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        a {
+            color: #0000FF;
+            padding: 10px;
+        }
+        .links{
+            text-align: center;
+        }
+        .side {
+            flex: 1;
+            background-color: #5498FF;
+            border: 1px solid #ddd;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .side1 {
+            flex: 1;
+            background-color: #f0f0f0;
+            background: url('lostfoundlogos.jpeg') center/cover no-repeat;
+            border: 1px solid #ddd;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .logo {
+            width: 130px;
+            height: 130px;
+            background-color: lightblue;
+            position: absolute;
+            top: 20px;
+            left: 1225px;
+            border-radius: 60px;
+            background: url('lostfoundlogos.jpeg') center/cover no-repeat;
+            /* Alternatively, you can use 'bottom' and 'right' for positioning */
+        }
+        .eye-icon {
+            cursor: pointer;
+            user-select: none;
+        }
+        .error {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="side1">
+        <!-- Content for the left side goes here -->
+
+    </div>
+
+
+    <div class="side">
+        <!-- Content for the right side goes here -->
+        <div class="logo">
+    
+
+        </div>
+       <div class="container">
+            <h1>Welcome Back</h1>
+            <form action="login.php" method="POST">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" required pattern="[0-9]{10}">
+                
+                <label for="password">Password </label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <?php
+                    session_start();
+                    // Check if there is an error message in session
+                    if (isset($_SESSION['error'])) {
+                        // Display the error message in red
+                        echo '<p class="error">' . $_SESSION['error'] . '</p>';
+                        // Clear the error message from session
+                        unset($_SESSION['error']);
+                    }
+                    ?>
+                <!-- Display error message if exists 
+                <?php if (!empty($errorMsg)): ?>
+                <p style="color: red;"><?php echo $errorMsg; ?></p>
+                <?php endif; ?>
+                -->
+                <!-- make password visible -->
+                <span class="eye-icon" onclick="togglePasswordVisibility()">
+                    👁️
+                </span>
+                <br>
+                </label>
+                <div class="submit_button">
+                  <input type="submit" value="Login">  
+                </div>
+                
+                <div class="links">
+                <a href="password_reset.html">Forgot password?</a>
+                <a href="register.html">Create An Account</a> 
+                </div>
+                
+
+    </form>
+    
+    </div>
+
+    </div>
+    <!-- script function make password visible -->
+    <script>
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById('password');
+            var eyeIcon = document.querySelector('.eye-icon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.textContent = '👀';
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.textContent = '👁️';
+            }
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost and Found</title>
+    <link rel="stylesheet" href="maincss.css">
+
+</head>
+<body>
+
+    <main>        
+        <div class="headercontainer">
+            <div class="websitetitle">
+              <!--img src="images/lost and found icon.png" alt="Icon" width="20px" height="20px"> -->  
+              iFound
+            </div>
+    
+            <form>
+                    <div class="searchBox">
+                        <input type="text" class="search-input" placeholder="Search..." oninput="liveSearch(this.value)">  
+                    </div>      
+            </form>
+        
+            <div id="searchResults">
+    
+            </div>       
+        </div>
+    <div class="bodycontainer">
+        <div class="navcontainer">
+            <div class="dashboard">
+                DASHBOARD
+            </div>
+            <div class="navbuttons">
+                <form action="initialpage1.html" method="get">
+                    <input type="submit" value="HOME">
+                </form>
+                <form action="reportform.html" method="get">
+                    <input type="submit" value="REPORT">
+                </form>
+                <form action="profile.php" method="get">
+                    <input type="submit" value="PROFILE">
+                </form>
+                <form action="chat.php" method="get">
+                    <input type="submit" value="Chat">
+                </form>
+                <div class="logoutbox">
+                    <form action="logout.php" method="get">
+                    <input type="submit" value="LOG OUT">
+                </form>
+                </div>
+                
+            </div>
+        </div>
+
+    <div class="categoriescontainer">
+
+        <form action="lost.html" method="get">
+            <input type="submit" value="LOST">
+        </form>
+        <form action="found.html" method="get">
+            <input type="submit" value="FOUND">
+        </form>
+        <form action="Electronics.html" method="get">
+            <input type="submit" value="Electronics">
+        </form>
+        
+        <form action="personal.html" method="get">
+            <input type="submit" value="Personal">
+        </form>
+        <form action="clothing.html" method="get">
+            <input type="submit" value="Clothing">
+        </form>
+        <form action="documents.html" method="get">
+            <input type="submit" value="Documents">
+        </form>
+        <form action="keys.html" method="get">
+            <input type="submit" value="Keys">
+        </form>
+       
+
+    </div>
+
+    <div class="maincontainer">
+
+        <div class="container" id="foundItemsContainer">
+            <!-- Found items will be dynamically added here -->
+    
+        </div>
+
+    </div> 
+    <script>
+        function liveSearch(query) {
+            const resultsContainer = document.getElementById('searchResults');
+
+            if (query.length === 0) {
+                resultsContainer.style.display = 'none';
+                resultsContainer.classList.remove('hasResults');
+                return;
+            }
+
+            // Use Fetch API to make an asynchronous request to the livesearch.php file
+            fetch(`livesearchclothing.php?query=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Display the results
+                    resultsContainer.innerHTML = '';
+                    data.forEach(result => {
+                        const link = document.createElement('a');
+                        link.href = `details.php?id=${result.id}`; // Replace 'details.php' with your actual details page
+                        link.textContent = result.Name;
+                        resultsContainer.appendChild(link);
+                    });
+
+                    // Show the results container
+                    resultsContainer.style.display = 'block';
+
+                    // Check if there are results and add the 'hasResults' class accordingly
+                    if (data.length > 0) {
+                        resultsContainer.classList.add('hasResults');
+                    } else {
+                        resultsContainer.classList.remove('hasResults');
+                    }
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+        let foundItemsData = [];
+document.addEventListener('DOMContentLoaded', function () {
+// Fetch data and display found pictures on page load
+fetch('scripts/fetchfoundpicturesclothing.php')
+    .then(response => response.json())
+    .then(data => {
+        displayFoundPictures(data);
+    })
+    .catch(error => console.error('Error fetching data:', error));
+
+function displayFoundPictures(data) {
+    const container = document.getElementById("foundItemsContainer");
+
+    data.forEach(item => {
+        const foundItemDiv = document.createElement("div");
+        foundItemDiv.classList.add("found-items_pictures");
+
+        const filepath = document.createElement("img");
+        filepath.src = item.filepath;
+        filepath.alt = item.filename;
+
+        const itemName = document.createElement("p");
+        itemName.textContent = `Name: ${item.Name}`;
+
+        const itemstate = document.createElement("p1");
+        itemstate.textContent = `${item.state}`;
+
+        const itemid = document.createElement("p");
+        itemid.textContent = `ID: ${item.id}`;
+
+        foundItemDiv.appendChild(filepath);
+        foundItemDiv.appendChild(itemName);
+        foundItemDiv.appendChild(itemstate);
+
+        // Add a click event listener to each image
+        foundItemDiv.addEventListener('click', function () {
+            // Redirect to more information page
+            window.location.href = `details.php?id=${item.id}`;
+        });
+
+        container.appendChild(foundItemDiv);
+    });
+}
+});
+
+     
+
+        // Script to fetch text information
+        fetch('scripts/fetchfoundtextsclothing.php')
+            .then(response => response.json())
+            .then(data => {
+                // Use the fetched data
+                displayFoundTexts(data);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+            // Function to display found text information on the page
+            function displayFoundTexts(data) {
+                const container = document.getElementById("foundItemsContainer1");
+
+                data.forEach(item => {
+                    const foundItemDiv = document.createElement("div");
+                    foundItemDiv.classList.add("found-items_texts");
+
+                const itemid = document.createElement("p");
+                itemid.textContent = `ID: ${item.id}`;
+
+                const itemCategory = document.createElement("p");
+                itemCategory.textContent = `Category: ${item.Category}`;
+
+                const itemName = document.createElement("p");
+                itemName.textContent = `Name: ${item.Name}`;
+
+                const itemDescription = document.createElement("p");
+                itemDescription.textContent = `Description: ${item.Description}`;
+
+                const itemLocation = document.createElement("p");
+                itemLocation.textContent = `Location: ${item.Location}`;
+
+                const itemStatus = document.createElement("p");
+                itemStatus.textContent = `Status: ${item.Status}`;
+
+                const itemstate = document.createElement("p");
+                itemstate.textContent = `State: ${item.state}`;
+
+                const itemdate_found = document.createElement("p");
+                itemdate_found.textContent = `Date Found: ${item.date_found}`;
+
+                const itemtime_found = document.createElement("p");
+                itemtime_found.textContent = `Time Found: ${item.time_found}`;
+
+
+                foundItemDiv.appendChild(itemid);             
+                foundItemDiv.appendChild(itemStatus);
+                foundItemDiv.appendChild(itemstate);
+                foundItemDiv.appendChild(itemName);
+                foundItemDiv.appendChild(itemDescription);
+                foundItemDiv.appendChild(itemCategory);
+                foundItemDiv.appendChild(itemLocation);
+                foundItemDiv.appendChild(itemtime_found);
+                foundItemDiv.appendChild(itemdate_found);
+
+
+                    container.appendChild(foundItemDiv);
+                });
+            }
+
+            displayFoundTexts(foundItemsData);
+        
+
+</script>
+ </main>
+   
+</body>
+</html>
